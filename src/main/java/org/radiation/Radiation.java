@@ -15,7 +15,7 @@ public class Radiation implements ModInitializer {
         // Регистрация эффектов, блоков и предметов
         ModEffects.register();
         ModBlocks.register();
-        ModItems.registerModItems();
+        ModItems.registerItems();
         ModItemGroups.register();
 
         // GeckoLib.initialize() в версии 4.8.2/5.0 больше не требуется
