@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "radiation",
+  "version": "${version}",
+  "name": "Radiation Fabric 1.21.1",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/radiation/textures/mob_effect/radiation.png",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.client.radiationDataGenerator"
+    ],
+    "main": [
+      "org.radiation.Radiation"
+    ]
+  },
+  "mixins": [
+    "radiation.mixins.json",
+    {
+      "config": "radiation.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
