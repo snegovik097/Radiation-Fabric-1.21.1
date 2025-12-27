@@ -1,38 +1,30 @@
 package org.radiation.effect;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 
 public class RadiationStatusEffect extends StatusEffect {
-
     public RadiationStatusEffect() {
-        super(StatusEffectCategory.HARMFUL, 0x4EFD8A); // green-ish color
-        this.addAttributeModifier(
-                EntityAttributes.MOVEMENT_SPEED,
-                Identifier.of("rad_eff"),
-                -0.15D,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-        );
+        super(StatusEffectCategory.HARMFUL, 0x33FF33);
     }
 
     @Override
-    public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
-        int interval = Math.max(20, 40 - amplifier * 5); // hurt roughly every 1-2s
-        long gameTime = world.getTime();
-        if (gameTime % interval != 0) {
-            return false;
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+        // В 1.21.1 метод damage теперь не требует World первым аргументом
+        // Атрибуты теперь вызываются через GENERIC_...
+        entity.damage(entity.getDamageSources().magic(), 1.0f * (amplifier + 1));
+        return true;
+    }
+
+    @Override
+    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+        int i = 25 >> amplifier;
+        if (i > 0) {
+            return duration % i == 0;
         }
-
-        float damage = 1.0F + amplifier * 0.5F;
-        var damageSource = world.getDamageSources().magic();
-
-        entity.damage(world, damageSource, damage);
         return true;
     }
 }
-

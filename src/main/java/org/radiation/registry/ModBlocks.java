@@ -6,8 +6,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import org.radiation.Radiation;
@@ -24,16 +22,17 @@ public final class ModBlocks {
 
     private static Block registerBlock(String name) {
         Identifier id = Identifier.of(Radiation.MOD_ID, name);
-        RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, id);
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
 
+        // Убираем .registryKey(blockKey), так как он вызывает ошибку
         Block block = new RadiationSnowLayerBlock(AbstractBlock.Settings.create()
-                .registryKey(blockKey)
                 .strength(0.1F)
                 .sounds(BlockSoundGroup.SNOW));
 
-        Registry.register(Registries.BLOCK, blockKey, block);
-        Registry.register(Registries.ITEM, itemKey, new BlockItem(block, new Item.Settings().registryKey(itemKey)));
+        // Регистрируем блок
+        Registry.register(Registries.BLOCK, id, block);
+
+        // Регистрируем предмет для блока (тоже без .registryKey)
+        Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
 
         return block;
     }

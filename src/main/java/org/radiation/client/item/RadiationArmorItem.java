@@ -1,12 +1,12 @@
-package org.radiation.item;
+package org.radiation.client.item;
 
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
-import org.radiation.Radiation;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -21,8 +21,8 @@ import java.util.function.Supplier;
 public class RadiationArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    // Используем стандартный метод GeckoLib для создания провайдера
-    private final Supplier<Object> renderProvider = GeoRenderProvider.lazy(this);
+    // В GeckoLib для 1.21.1 используем GeoItem.makeRenderer
+    private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public RadiationArmorItem(RegistryEntry<ArmorMaterial> material, ArmorItem.Type type, Settings settings) {
         super(material, type, settings);
@@ -30,14 +30,25 @@ public class RadiationArmorItem extends ArmorItem implements GeoItem {
 
 
     public void createRenderer(Consumer<Object> consumer) {
+        // Используем GeoRenderProvider для регистрации рендерера
         consumer.accept(new GeoRenderProvider() {
+            private Object renderer;
 
-            public Object getHumanoidArmorModel(
+
+            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(
                     LivingEntity livingEntity,
                     ItemStack itemStack,
                     EquipmentSlot equipmentSlot,
                     BipedEntityModel<LivingEntity> original) {
-                return Radiation.getModel(livingEntity, itemStack, equipmentSlot, original);
+
+                if (this.renderer == null) {
+                    this.renderer = new org.radiation.client.renderer.RadiationArmorRenderer();
+                }
+
+                var armorRenderer = (software.bernie.geckolib.renderer.GeoArmorRenderer<?>) this.renderer;
+                armorRenderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+
+                return (BipedEntityModel<LivingEntity>) this.renderer;
             }
         });
     }

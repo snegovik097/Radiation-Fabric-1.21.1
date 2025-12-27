@@ -11,7 +11,7 @@
   "environment": "server",
   "entrypoints": {
     "fabric-datagen": [
-      "org.client.radiationDataGenerator"
+      "org.radiation.client.radiationDataGenerator"
     ],
     "main": [
       "org.radiation.Radiation"
