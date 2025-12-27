@@ -1,4 +1,4 @@
-package org.radiation.item;
+package org.radiation.client.item;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
