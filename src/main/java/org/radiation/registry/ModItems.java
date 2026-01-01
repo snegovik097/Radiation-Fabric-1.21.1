@@ -16,8 +16,8 @@ public class ModItems {
                     new Item.Settings().maxCount(1)
             );
 
-    public static void registerItems() {
-        Registry.register(
+    public static void registerItem() {
+         Registry.register(
                 Registries.ITEM,
                 Identifier.of(Radiation.MOD_ID, "radiation_helmet"),
                 RADIATION_HELMET
