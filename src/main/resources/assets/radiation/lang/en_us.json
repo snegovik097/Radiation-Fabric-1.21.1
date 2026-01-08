@@ -1,7 +1,14 @@
 {
   "effect.radiation.radiation": "Radiation",
-  "block.radiation.radiation_snow": "Radiation Snow",
-  "item.radiation.radiation_snow": "Radiation Snow",
+
+  "block.radiation.radiation_snow": "Radiation snow",
+
+  "item.radiation.radiation_snow": "Radiation snow",
+  "item.radiation.radiation_helmet": "Radiation helmet",
+  "item.radiation.radiation_chestplate": "Radiation chestplate",
+  "item.radiation.radiation_leggings": "Radiation leggings",
+  "item.radiation.radiation_boots": "Radiation boots",
+
   "itemGroup.radiation.radiation_group": "Radiation"
 }
 

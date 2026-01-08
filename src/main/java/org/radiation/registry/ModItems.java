@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import org.radiation.item.RadiationArmorItem;
 
 public class ModItems {
-    public static final RegistryEntry<ArmorMaterial> RADIATION_MATERIAL = ArmorMaterials.IRON;
+    public static final RegistryEntry<ArmorMaterial> RADIATION_MATERIAL = ModArmorMaterials.RADIATION_MATERIAL;
 
     public static final Item RADIATION_HELMET = Registry.register(Registries.ITEM,
             Identifier.of("radiation", "radiation_helmet"),

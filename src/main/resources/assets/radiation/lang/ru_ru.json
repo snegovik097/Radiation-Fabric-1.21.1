@@ -1,7 +1,13 @@
 {
   "effect.radiation.radiation": "Радиация",
+
   "block.radiation.radiation_snow": "Радиактивный снег",
+
   "item.radiation.radiation_snow": "Радиактивный снег",
+  "item.radiation.radiation_helmet": "Радиактивный шлем",
+  "item.radiation.radiation_chestplate": "Радиактивный нагрудник",
+  "item.radiation.radiation_leggings": "Радиактивные штаны",
+  "item.radiation.radiation_boots": "Радиактивные ботинки",
+
   "itemGroup.radiation.radiation_group": "Радиация"
 }
-
